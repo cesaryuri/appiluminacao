@@ -7,12 +7,11 @@ class CardveListtileKullanimi extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Card Ve Listtile Kullanimi"),
+        title: const Text("Dispositivos"),
       ),
       body: Center(
         child: ListView(
-          reverse: true, //*tersten siralar elemanlari
-
+          reverse: false,
           children: [
             Column(
               children: [
@@ -22,18 +21,8 @@ class CardveListtileKullanimi extends StatelessWidget {
                 myCard(),
                 myCard(),
                 myCard(),
-                myCard(),
-                myCard(),
-                myCard(),
-                myCard(),
               ],
             ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(Icons.access_alarms_sharp),
-            ),
-            const Text(
-                "Aralarindaki fark ListView yapisi bizden children yapida elemanlar bekliyor bu sekilde yenide ekleyebiliriz"),
           ],
         ),
       ),
@@ -72,23 +61,19 @@ class CardveListtileKullanimi extends StatelessWidget {
           ),
           child: const ListTile(
             leading: CircleAvatar(child: Icon(Icons.add)),
-            title: Text("Baslik"),
-            subtitle: Text("Alt Baslik"),
-            trailing: Icon(Icons.train),
+            title: Text("Sistema 1"),
+            subtitle: Text("Status:"),
+            trailing: Icon(Icons.lightbulb_outline),
           ),
         ),
         const Divider(
-          //*iki eleman arasini bolen cizgi
-          color: Colors.red,
+          color: Color.fromARGB(255, 31, 29, 29),
           thickness: 1,
           height: 10,
-          indent: 20, //*soldan bosluk
-          endIndent: 20, //*sagdan bosluk
+          indent: 20,
+          endIndent: 20,
         )
       ],
     );
   }
 }
-
-//! Bu yapilar performans Dostu Yapilar degildir cinku herbir eleman hafizada yer tutar az elemaniniz varsa kullanilirsaniz olur ama cok daha buyuk miktarda elemaniniz varsa kullmak pek dogru degildir
-//! Mantik su seilde olmali sadece ekranda gorunenler listelesin seklinde digerleride ekrana geldikce olustulsun olmali
