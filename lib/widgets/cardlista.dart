@@ -21,7 +21,8 @@ class MyCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             child: ListTile(
-              leading: CircleAvatar(child: Icon(Icons.add)),
+              leading:
+                  CircleAvatar(child: Icon(Icons.display_settings_outlined)),
               title: Text("Sistema 1"),
               subtitle: Text("Status:"),
               trailing: Icon(Icons.lightbulb_outline),
