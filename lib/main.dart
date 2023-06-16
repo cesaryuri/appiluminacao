@@ -1,23 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import './sistemas.dart';
-import './sistemastexto.dart';
-import './card_listtile.dart';
-import './sayfa_gecis_button.dart';
+import 'pages/sistemas.dart';
+import 'pages/sistemastexto.dart';
+import 'pages/card_listtile.dart';
+import 'widgets/button_chamada.dart';
 
 main() => runApp(AppIluminacao());
 
 class _AppIluminacaoState extends State<AppIluminacao> {
-  var indicesistema = 0;
-  void _escolher() {
-    setState(() {
-      indicesistema++;
-    });
-
-    print(indicesistema);
-  }
-
   @override
+  int indicesistema = 0;
   Widget build(BuildContext context) {
     final funcao = [
       'Inicio',
@@ -38,9 +30,9 @@ class _AppIluminacaoState extends State<AppIluminacao> {
             //SistemaTexto('Sistema 1', _escolher),
             //SistemaTexto('Sistema 2', _escolher),
             //SistemaTexto('Sistema 3', _escolher),
-            SayfaGecisButton(
+            Botaopagecham(
                 isim: "Acessar lista de dispositivos sistema",
-                sayfa: const CardveListtileKullanimi()),
+                buttonlist: const ListCards()),
           ],
         ),
       ),

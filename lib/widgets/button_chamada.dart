@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class SayfaGecisButton extends StatefulWidget {
+class Botaopagecham extends StatefulWidget {
   String isim;
-  Widget sayfa;
-  SayfaGecisButton({Key? key, required this.isim, required this.sayfa})
+  Widget buttonlist;
+  Botaopagecham({Key? key, required this.isim, required this.buttonlist})
       : super(key: key);
 
   @override
-  State<SayfaGecisButton> createState() => _SayfaGecisButtonState();
+  State<Botaopagecham> createState() => ButtonState();
 }
 
-class _SayfaGecisButtonState extends State<SayfaGecisButton> {
+class ButtonState extends State<Botaopagecham> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
@@ -18,7 +18,7 @@ class _SayfaGecisButtonState extends State<SayfaGecisButton> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => widget.sayfa,
+            builder: (context) => widget.buttonlist,
           ),
         );
       },
