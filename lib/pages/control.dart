@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:appiluminacao/models/dispositivos.dart';
 
 class ControleMonitoramentoPage extends StatefulWidget {
   @override
@@ -7,6 +8,10 @@ class ControleMonitoramentoPage extends StatefulWidget {
 }
 
 class _ControleMonitoramentoPageState extends State<ControleMonitoramentoPage> {
+  //final _dispositivos = [
+  //Dispositivos(id: 1, name: 'Dispositivo 1', status: 55, intensidade: true),
+  //];
+
   bool isLigado = true;
   double intensidade = 0.5;
 
