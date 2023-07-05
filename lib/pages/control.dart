@@ -1,29 +1,44 @@
+import 'package:appiluminacao/pages/card_listtile.dart';
+import 'package:appiluminacao/services/api_service.dart';
 import 'package:flutter/material.dart';
-import 'package:appiluminacao/models/dispositivos.dart';
 
 class ControleMonitoramentoPage extends StatefulWidget {
+  ControleMonitoramentoPage({super.key, required this.propertiesLights});
+  Map<dynamic, dynamic> propertiesLights;
   @override
-  _ControleMonitoramentoPageState createState() =>
+  State<ControleMonitoramentoPage> createState() =>
       _ControleMonitoramentoPageState();
 }
 
 class _ControleMonitoramentoPageState extends State<ControleMonitoramentoPage> {
-  //final _dispositivos = [
-  //Dispositivos(id: 1, name: 'Dispositivo 1', status: 55, intensidade: true),
-  //];
+  final ApiService apiService = ApiService();
 
-  bool isLigado = true;
-  double intensidade = 0.5;
+  @override
+  void initState() {
+    super.initState();
+    widget.propertiesLights['status'] =
+        widget.propertiesLights['status'] == 1 ? true : false;
+  }
 
   void toggleLigado() {
     setState(() {
-      isLigado = !isLigado;
+      widget.propertiesLights['status'] = !widget.propertiesLights['status'];
+      Map<String, dynamic> updateMap = {
+        'intensity': widget.propertiesLights['intensity'],
+        'status': widget.propertiesLights['status']
+      };
+      apiService.updateLight(updateMap, widget.propertiesLights['id']);
     });
   }
 
   void updateIntensidade(double value) {
     setState(() {
-      intensidade = value;
+      widget.propertiesLights['intensity'] = value;
+      Map<String, dynamic> updateMap = {
+        'intensity': widget.propertiesLights['intensity'],
+        'status': widget.propertiesLights['status']
+      };
+      apiService.updateLight(updateMap, widget.propertiesLights['id']);
     });
   }
 
@@ -31,33 +46,50 @@ class _ControleMonitoramentoPageState extends State<ControleMonitoramentoPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Controle e Monitoramento'),
-      ),
+          title: const Text('Controle e Monitoramento'),
+          leading: GestureDetector(
+            onTap: () {
+              Navigator.pushAndRemoveUntil(context, MaterialPageRoute(
+                builder: (context) {
+                  return const ListCards();
+                },
+              ), (route) => false);
+            },
+            child: const Icon(
+              Icons.arrow_back,
+            ),
+          )),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Detalhes do Sistema de Iluminação',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
-            Text('Status: ${isLigado ? 'Ligado' : 'Desligado'}'),
-            Text('Intensidade: ${(intensidade * 100).toStringAsFixed(0)}%'),
-            SizedBox(height: 40),
+            const SizedBox(height: 20),
+            Text(
+                'Status: ${widget.propertiesLights['status'] ? 'Ligado' : 'Desligado'}'),
+            Text(
+                'Intensidade: ${(widget.propertiesLights['intensity'] * 100).toStringAsFixed(0)}%'),
+            const SizedBox(height: 40),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 ElevatedButton(
                   onPressed: toggleLigado,
-                  child: Text(isLigado ? 'Desligar' : 'Ligar'),
+                  child: Text(widget.propertiesLights['status'] == 1
+                      ? 'Desligar'
+                      : 'Ligar'),
                 ),
-                SizedBox(width: 20),
+                const SizedBox(width: 20),
                 Slider(
-                  value: intensidade,
+                  value: double.parse(
+                      widget.propertiesLights['intensity'].toString()),
                   min: 0.0,
                   max: 1.0,
-                  onChanged: updateIntensidade,
+                  onChangeEnd: updateIntensidade,
+                  onChanged: (value) {},
                 ),
               ],
             ),
