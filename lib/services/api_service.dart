@@ -8,4 +8,12 @@ class ApiService {
     final result = await dio.get("${baseUrl}getall");
     return result.data['data'];
   }
+
+  Future<void> updateLight(Map<String, dynamic> lightData, int id) async {
+    try {
+      await dio.put("${baseUrl}updatelight/$id", data: lightData);
+    } on DioException catch (e) {
+      print(e);
+    }
+  }
 }
