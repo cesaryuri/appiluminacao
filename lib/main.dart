@@ -18,7 +18,7 @@ class _AppIluminacaoState extends State<AppIluminacao> {
           children: <Widget>[
             Botaopagecham(
               isim: "Acessar lista de dispositivos sistema",
-              buttonlist: const ListCards(),
+              buttonlist: ListCards(),
             ),
             Center(
               child: Text('Versão Alfa - 0.1'),
